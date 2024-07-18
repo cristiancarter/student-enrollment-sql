@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="section-title">Student Enrollment Project - SQL</h1>
+        <p class="subtitle">
+          Made ANOTHER website to showcase these because Jason said
+          I can't stop showing off. He's right again.
+        </p>
+      </header>
+
+      <main>
+        <div class="steps-container">
+          <div class="step">
+            <h2 class="step-title">STEP 1: Setup Database</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-1">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-1">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-1">
+                <pre><code class="language-sql">
+CREATE DATABASE UK_University;
+USE UK_University;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-1">
+                <div class="preview-box">
+                  <p>Database 'UK_University' created and selected for use.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 2: Create Tables</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-2">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-2">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-2">
+                <pre><code class="language-sql">
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DateOfBirth DATE,
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY AUTO_INCREMENT,
+    CourseName VARCHAR(100),
+    Department VARCHAR(50)
+);
+
+CREATE TABLE Enrolments (
+    EnrolmentID INT PRIMARY KEY AUTO_INCREMENT,
+    StudentID INT,
+    CourseID INT,
+    Grade CHAR(2),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-2">
+                <div class="preview-box">
+                  <h3>Students Table</h3>
+                  <table>
+                    <tr>
+                      <th>StudentID</th>
+                      <th>FirstName</th>
+                      <th>LastName</th>
+                      <th>DateOfBirth</th>
+                      <th>Email</th>
+                    </tr>
+                  </table>
+
+                  <h3>Courses Table</h3>
+                  <table>
+                    <tr>
+                      <th>CourseID</th>
+                      <th>CourseName</th>
+                      <th>Department</th>
+                    </tr>
+                  </table>
+
+                  <h3>Enrolments Table</h3>
+                  <table>
+                    <tr>
+                      <th>EnrolmentID</th>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 3: Insert Sample Data</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-3">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-3">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-3">
+                <pre><code class="language-sql">
+INSERT INTO Students (FirstName, LastName, DateOfBirth, Email) VALUES
+('Alice', 'Smith', '2000-03-15', 'alice.smith@example.co.uk'),
+('John', 'Doe', '1999-07-22', 'john.doe@example.co.uk'),
+('Emily', 'Johnson', '2001-12-05', 'emily.johnson@example.co.uk');
+
+INSERT INTO Courses (CourseName, Department) VALUES
+('Computer Science', 'Engineering'),
+('History', 'Arts'),
+('Business Management', 'Business');
+
+INSERT INTO Enrolments (StudentID, CourseID, Grade) VALUES
+(1, 1, 'A'),
+(2, 2, 'B'),
+(3, 3, 'C');
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-3">
+                <div class="preview-box">
+                  <h3>Students Table</h3>
+                  <table>
+                    <tr>
+                      <th>StudentID</th>
+                      <th>FirstName</th>
+                      <th>LastName</th>
+                      <th>DateOfBirth</th>
+                      <th>Email</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>Alice</td>
+                      <td>Smith</td>
+                      <td>2000-03-15</td>
+                      <td>alice.smith@example.co.uk</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>John</td>
+                      <td>Doe</td>
+                      <td>1999-07-22</td>
+                      <td>john.doe@example.co.uk</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Emily</td>
+                      <td>Johnson</td>
+                      <td>2001-12-05</td>
+                      <td>emily.johnson@example.co.uk</td>
+                    </tr>
+                  </table>
+
+                  <h3>Courses Table</h3>
+                  <table>
+                    <tr>
+                      <th>CourseID</th>
+                      <th>CourseName</th>
+                      <th>Department</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>Computer Science</td>
+                      <td>Engineering</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>History</td>
+                      <td>Arts</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Business Management</td>
+                      <td>Business</td>
+                    </tr>
+                  </table>
+
+                  <h3>Enrolments Table</h3>
+                  <table>
+                    <tr>
+                      <th>EnrolmentID</th>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>B</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>C</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 4: Create Queries</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-4">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-4">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-4">
+                <pre><code class="language-sql">
+-- List all students
+SELECT * FROM Students;
+
+-- List all courses
+SELECT * FROM Courses;
+
+-- List all enrolments
+SELECT * FROM Enrolments;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-4">
+                <div class="preview-box">
+                  <h3>All Students</h3>
+                  <table>
+                    <tr>
+                      <th>StudentID</th>
+                      <th>FirstName</th>
+                      <th>LastName</th>
+                      <th>DateOfBirth</th>
+                      <th>Email</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>Alice</td>
+                      <td>Smith</td>
+                      <td>2000-03-15</td>
+                      <td>alice.smith@example.co.uk</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>John</td>
+                      <td>Doe</td>
+                      <td>1999-07-22</td>
+                      <td>john.doe@example.co.uk</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Emily</td>
+                      <td>Johnson</td>
+                      <td>2001-12-05</td>
+                      <td>emily.johnson@example.co.uk</td>
+                    </tr>
+                  </table>
+
+                  <h3>All Courses</h3>
+                  <table>
+                    <tr>
+                      <th>CourseID</th>
+                      <th>CourseName</th>
+                      <th>Department</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>Computer Science</td>
+                      <td>Engineering</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>History</td>
+                      <td>Arts</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Business Management</td>
+                      <td>Business</td>
+                    </tr>
+                  </table>
+
+                  <h3>All Enrolments</h3>
+                  <table>
+                    <tr>
+                      <th>EnrolmentID</th>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>B</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>C</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 5: Update Grade</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-5">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-5">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-5">
+                <pre><code class="language-sql">
+UPDATE Enrolments
+SET Grade = 'A'
+WHERE StudentID = 2 AND CourseID = 2;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-5">
+                <div class="preview-box">
+                  <h3>Updated Enrolments Table</h3>
+                  <table>
+                    <tr>
+                      <th>EnrolmentID</th>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>C</td>
+                    </tr>
+                  </table>
+                  <p>
+                    The grade for StudentID 2 and CourseID 2 has been
+                    updated from 'B' to 'A'.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 6: Create View</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-6">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-6">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-6">
+                <pre><code class="language-sql">
+CREATE VIEW StudentGrades AS
+SELECT 
+    s.FirstName,
+    s.LastName,
+    c.CourseName,
+    e.Grade
+FROM 
+    Enrolments e
+    JOIN Students s ON e.StudentID = s.StudentID
+    JOIN Courses c ON e.CourseID = c.CourseID;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-6">
+                <div class="preview-box">
+                  <h3>StudentGrades View</h3>
+                  <table>
+                    <tr>
+                      <th>FirstName</th>
+                      <th>LastName</th>
+                      <th>CourseName</th>
+                      <th>Grade</th>
+                    </tr>
+                    <tr>
+                      <td>Alice</td>
+                      <td>Smith</td>
+                      <td>Computer Science</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>John</td>
+                      <td>Doe</td>
+                      <td>History</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>Emily</td>
+                      <td>Johnson</td>
+                      <td>Business Management</td>
+                      <td>C</td>
+                    </tr>
+                  </table>
+                  <p>
+                    This view combines data from Students, Courses, and
+                    Enrolments tables.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 7: Stored Procedures</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-7">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-7">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-7">
+                <pre><code class="language-sql">
+DELIMITER //
+
+CREATE PROCEDURE EnrolStudent (
+    IN p_StudentID INT,
+    IN p_CourseID INT
+)
+BEGIN
+    INSERT INTO Enrolments (StudentID, CourseID, Grade)
+    VALUES (p_StudentID, p_CourseID, 'NA');
+END //
+
+DELIMITER ;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-7">
+                <div class="preview-box">
+                  
+                  <pre><code class="language-sql">CALL EnrolStudent(4, 1);</code></pre>
+                  <p>
+                    This would enrol a student with StudentID 4 into the course
+                    with CourseID 1, with an initial grade of 'NA'.
+                  </p>
+                  <h3>
+                    Example:
+                  </h3>
+                  <table>
+                    <tr>
+                      <th>EnrolmentID</th>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>A</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>C</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>4</td>
+                      <td>1</td>
+                      <td>NA</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h2 class="step-title">STEP 8: CASE Statement</h2>
+            <div class="step-content">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="code-8">
+                  SQL Code
+                </button>
+                <button class="tab-btn" data-tab="preview-8">Preview</button>
+              </div>
+              <div class="tab-content active" id="code-8">
+                <pre><code class="language-sql">
+SELECT 
+    StudentID,
+    CourseID,
+    Grade,
+    CASE
+        WHEN Grade = 'A' THEN 'Excellent'
+        WHEN Grade = 'B' THEN 'Good'
+        WHEN Grade = 'C' THEN 'Average'
+        ELSE 'Needs Improvement'
+    END AS Performance
+FROM Enrolments;
+                            </code></pre>
+              </div>
+              <div class="tab-content" id="preview-8">
+                <div class="preview-box">
+                  <h3>Student Performance</h3>
+                  <table>
+                    <tr>
+                      <th>StudentID</th>
+                      <th>CourseID</th>
+                      <th>Grade</th>
+                      <th>Performance</th>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>A</td>
+                      <td>Excellent</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>A</td>
+                      <td>Excellent</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>C</td>
+                      <td>Average</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>1</td>
+                      <td>NA</td>
+                      <td>Needs Improvement</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-sql.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
