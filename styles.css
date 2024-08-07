@@ -149,4 +149,21 @@ th {
     .tab-btn {
         padding: 8px 15px;
     }
+
+    .preview-box table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .preview-box table th, .preview-box table td {
+        white-space: nowrap;
+    }
+
+    .preview-box table th, .preview-box table td {
+        display: inline-block;
+        width: auto;
+        vertical-align: top;
+    }
 }
